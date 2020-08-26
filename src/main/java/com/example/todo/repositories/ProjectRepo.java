@@ -1,7 +1,7 @@
 package com.example.todo.repositories;
 
 import com.example.todo.entities.Project;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface ProjectRepo extends JpaRepository<Project, Long> {
+public interface ProjectRepo extends CrudRepository<Project, Long> {
 }
