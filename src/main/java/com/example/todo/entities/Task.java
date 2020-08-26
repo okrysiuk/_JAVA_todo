@@ -3,30 +3,28 @@ package com.example.todo.entities;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "tasks")
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     private boolean status;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "project_id")
-    private Project project;
 
     public Task(){
 
     }
-    public Task (Project project, String name) {
+    public Task(String name) {
+        super();
         this.name = name;
-        this.project = project;
+        this.status = true;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,20 +36,11 @@ public class Task {
         this.name = name;
     }
 
-    public boolean isActive() {
+    public boolean isStatus() {
         return status;
     }
 
     public void setStatus(boolean status) {
         this.status = status;
     }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
 }
