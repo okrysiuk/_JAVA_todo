@@ -14,31 +14,44 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-<!--    <link th:href="@{/css/home.css}" rel="stylesheet">-->
+    <!--    <link th:href="@{/css/home.css}" rel="stylesheet">-->
 
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <!-- Projects Column -->
-            <div th:each="project : ${projects}" class="col-md-12">
-                <form method="post">
-                    <h2 th:text="${project.name}" class="card-text text-center"></h2>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" name="filter" class="form-control" placeholder="Type task here..."/>
-                            <span class="input-group-append"><button class="btn btn-primary" type="submit">Add</button></span>
-                        </div>
+        <!-- Projects Column -->
+        <div th:each="project : ${projects}" class="col-md-12">
+            <form th:action="'/delete/' + ${project.id}" method="post">
+                <h2 th:text="${project.name}" class="card-text text-center d-inline-block"></h2>
+                <!--                <a class="btn btn-warning" type="submit">Edit</a>-->
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+            <div class="list-inline">
+                <form th:action="'/addTask/' + ${project.id}" method="post">
+                    <div class="input-group">
+                        <input type="text" name="name" class="form-control" placeholder="Type task here..."/>
+                        <span class="input-group-append"><button class="btn btn-primary" type="submit">Add</button></span>
                     </div>
-                        <br>
-                    <ul th:each="task : ${project.getTasks()}" class="list-group">
-                        <li class="list-group-item" th:text="${task.name}"></li>
-                    </ul>
                 </form>
             </div>
+            <br>
+            <div th:each="task : ${project.getTasks()}" class="list-inline">
+                <p class="d-inline-block" th:text="${task.name}"></p>
+                <a class="btn btn-warning" type="submit">Edit</a>
+                <button class="btn btn-danger" type="submit">Delete</button>
+                <hr>
+            </div>
         </div>
+        <form action="/addProject" method="post">
+            <div class="input-group">
+                <input type="text" name="name" class="form-control" placeholder="Type project name..."/>
+                <span class="input-group-append"><button class="btn btn-primary" type="submit">Add new Project</button></span>
+            </div>
+        </form>
     </div>
+</div>
 </body>
 </html>

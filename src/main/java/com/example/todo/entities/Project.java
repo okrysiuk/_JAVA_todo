@@ -50,4 +50,13 @@ public class Project {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", tasks=" + tasks +
+                '}';
+    }
 }
