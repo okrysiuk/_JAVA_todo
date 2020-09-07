@@ -7,9 +7,7 @@ import com.example.todo.repositories.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MainService {
@@ -37,7 +35,7 @@ public class MainService {
 
         return true;
     }
-    public boolean deleteProject(long projectId){
+    public void deleteProject(long projectId){
 
         Project project = projectRepo.findById(projectId);
 
@@ -49,7 +47,6 @@ public class MainService {
 
         this.projectRepo.delete(project);
 
-        return true;
     }
 
     public boolean addTask(String name, long projectId){
@@ -68,5 +65,22 @@ public class MainService {
         this.projectRepo.save(project);
 
         return true;
+    }
+
+    public void deleteTask(long taskId) {
+
+        Task task = taskRepo.findById(taskId);
+
+        taskRepo.delete(task);
+    }
+
+    public Project getProject(long projectId){
+
+        return projectRepo.findById(projectId);
+    }
+
+    public Task getTask(long taskId){
+
+        return taskRepo.findById(taskId);
     }
 }

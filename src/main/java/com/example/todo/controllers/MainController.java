@@ -1,5 +1,7 @@
 package com.example.todo.controllers;
 
+import com.example.todo.entities.Project;
+import com.example.todo.entities.Task;
 import com.example.todo.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,7 @@ public class MainController {
         return "home";
     }
 
-    @PostMapping("/addProject")
+    @PostMapping("/add-project")
     public String addProject(@RequestParam(required = false) String name, Model model){
 
         if(!mainService.addProject(name)){
@@ -32,14 +34,14 @@ public class MainController {
 
         return "redirect:/";
     }
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete-project/{id}")
     public String deleteProject(@PathVariable(value = "id")long projectId){
 
         mainService.deleteProject(projectId);
 
         return "redirect:/";
     }
-    @PostMapping("/addTask/{id}")
+    @PostMapping("/add-task/{id}")
     public String addTask(@PathVariable(value = "id")long projectId,
                           @RequestParam(required = false) String name,
                           Model model){
@@ -49,5 +51,30 @@ public class MainController {
         }
 
         return "redirect:/";
+    }
+    @PostMapping("/delete-task/{id}")
+    public String deleteTask(@PathVariable(value = "id")long taskId){
+
+        mainService.deleteTask(taskId);
+
+        return "redirect:/";
+    }
+    @GetMapping("/edit-project/{id}")
+    public String editProject(@PathVariable(value = "id")long projectId, Model model){
+
+        Project project = mainService.getProject(projectId);
+
+        model.addAttribute("project", project);
+
+        return "edit-project";
+    }
+    @GetMapping("/edit-task/{id}")
+    public String editTask(@PathVariable(value = "id")long taskId, Model model){
+
+        Task task = mainService.getTask(taskId);
+
+        model.addAttribute("task", task);
+
+        return "edit-task";
     }
 }
