@@ -18,5 +18,26 @@
 
 </head>
 <body>
+<div class="container">
+
+    <div class="row">
+
+        <!-- Task Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h2 class="mt-4">Edit your project:</h2>
+            <form method="post">
+                <input type="text" th:value="${project.name}" name="name" placeholder="Note name..." class="form-control"><br>
+                <button type="submit" class="btn btn-success">Update project</button>
+            </form>
+        </div>
+
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
 </body>
 </html>

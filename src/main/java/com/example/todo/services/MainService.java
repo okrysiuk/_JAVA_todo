@@ -83,4 +83,24 @@ public class MainService {
 
         return taskRepo.findById(taskId);
     }
+
+    public boolean updateProject(Project project, String name){
+        project.setName(name);
+        projectRepo.save(project);
+        return true;
+    }
+
+    public boolean updateTask(Task task, String name){
+        task.setName(name);
+        taskRepo.save(task);
+        return true;
+    }
+    public void updateStatus(Task task, boolean doneTask){
+
+        if (doneTask == true){
+            task.setStatus(false);
+        } else {
+            task.setStatus(true);
+        }
+    }
 }

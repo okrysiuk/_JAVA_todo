@@ -77,4 +77,37 @@ public class MainController {
 
         return "edit-task";
     }
+    @PostMapping("/edit-project/{id}")
+    public String updateProject(@PathVariable(value = "id")long projectId,
+                                @RequestParam(required = false) String name,
+                                Model model){
+
+        Project project = mainService.getProject(projectId);
+
+        if(mainService.updateProject(project, name)){
+            model.addAttribute("message", "Project was updated!");
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/edit-task/{id}")
+    public String updateTask(@PathVariable(value = "id")long taskId,
+                                @RequestParam(required = false) String name,
+                                @RequestParam(required = false) boolean doneTask,
+                                @RequestParam(required = false) int year,
+                                @RequestParam(required = false) int month,
+                                Model model){
+
+        Task task = mainService.getTask(taskId);
+
+        mainService.updateStatus(task, doneTask);
+
+        if(mainService.updateTask(task, name)) {
+            model.addAttribute("message", "Task was updated!");
+        }
+        System.out.println(year);
+        System.out.println(month);
+
+        return "redirect:/";
+    }
 }

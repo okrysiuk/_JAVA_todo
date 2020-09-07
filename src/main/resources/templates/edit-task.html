@@ -18,5 +18,29 @@
 
 </head>
 <body>
+<div class="container">
+
+    <div class="row">
+
+        <!-- Task Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h2 class="mt-4">Edit your current task:</h2>
+            <form method="post">
+                <input type="text" th:value="${task.name}" name="name" placeholder="Note name..." class="form-control"><br>
+                <input type="checkbox" name="doneTask" th:value="true" th:checked="${!task.isStatus()}"><label> Mark as done</label><hr>
+                <p>Select deadline: </p>
+                <div th:insert="date.html :: date"></div><hr>
+                <button type="submit" class="btn btn-success">Update task</button>
+            </form>
+        </div>
+
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
 </body>
 </html>

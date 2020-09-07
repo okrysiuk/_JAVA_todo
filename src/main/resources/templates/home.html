@@ -26,7 +26,7 @@
         <div th:each="project : ${projects}" class="col-md-12">
             <form th:action="'/delete-project/' + ${project.id}" method="post">
                 <h2 th:text="${project.name}" class="card-text text-center d-inline-block"></h2>
-                <a class="btn btn-warning" th:href="'/edit-project' + ${project.id}">Edit</a>
+                <a class="btn btn-warning" th:href="'/edit-project/' + ${project.id}">Edit</a>
                 <button class="btn btn-danger" type="submit">Delete</button>
             </form>
             <div class="list-inline">
@@ -40,8 +40,9 @@
             <br>
             <div th:each="task : ${project.getTasks()}" class="list-inline">
                 <form th:action="'/delete-task/' + ${task.id}" method="post">
-                    <p class="d-inline-block" th:text="${task.name}"></p>
-                    <a class="btn btn-warning">Edit</a>
+                    <p th:if="${task.isStatus()}" class="d-inline-block" th:text="${task.name}"></p>
+                    <p th:unless="${task.isStatus()}" class="d-inline-block"><strike th:text="${task.name}"></strike></p>
+                    <a class="btn btn-warning" th:href="'/edit-task/' + ${task.id}">Edit</a>
                     <button class="btn btn-danger" type="submit">Delete</button>
                 </form>
                 <hr>
