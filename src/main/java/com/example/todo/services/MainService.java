@@ -7,6 +7,8 @@ import com.example.todo.repositories.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
@@ -103,4 +105,25 @@ public class MainService {
             task.setStatus(true);
         }
     }
+    public void updateDate(Task task, int year, int month, int day) {
+
+        Calendar defaultDeadline = new GregorianCalendar(2021, 0 , 1);
+
+        Calendar newDeadline = new GregorianCalendar(year, month, day);
+        if(!defaultDeadline.equals(newDeadline)){
+            try {
+                task.setDeadline(newDeadline);
+                taskRepo.save(task);
+            } catch (Exception e) {
+                System.out.println("Wrong date!");
+            }
+        }
+    }
+        public void updatePriority (Task task, int priority){
+            if(priority != 0)
+            task.setPriority(priority);
+
+            taskRepo.save(task);
+        }
+
 }

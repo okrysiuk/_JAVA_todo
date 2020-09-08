@@ -96,17 +96,19 @@ public class MainController {
                                 @RequestParam(required = false) boolean doneTask,
                                 @RequestParam(required = false) int year,
                                 @RequestParam(required = false) int month,
+                                @RequestParam(required = false) int day,
+                                @RequestParam(required = false) int priority,
                                 Model model){
 
         Task task = mainService.getTask(taskId);
 
+        mainService.updateTask(task, name);
+
         mainService.updateStatus(task, doneTask);
 
-        if(mainService.updateTask(task, name)) {
-            model.addAttribute("message", "Task was updated!");
-        }
-        System.out.println(year);
-        System.out.println(month);
+        mainService.updatePriority(task, priority);
+
+        mainService.updateDate(task, year, month, day);
 
         return "redirect:/";
     }

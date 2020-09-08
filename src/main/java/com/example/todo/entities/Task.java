@@ -1,6 +1,8 @@
 package com.example.todo.entities;
 
 import javax.persistence.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 @Entity
 @Table(name = "tasks")
@@ -10,6 +12,8 @@ public class Task {
     private long id;
     private String name;
     private boolean status;
+    private Calendar deadline;
+    private int priority;
 
     public Task(){
 
@@ -18,6 +22,8 @@ public class Task {
         super();
         this.name = name;
         this.status = true;
+        this.deadline = new GregorianCalendar(2021, 0 , 1);
+        this.priority = 2;
     }
 
     public long getId() {
@@ -42,5 +48,21 @@ public class Task {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Calendar getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Calendar deadline) {
+        this.deadline = deadline;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }
