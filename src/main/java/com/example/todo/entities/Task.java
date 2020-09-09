@@ -1,7 +1,10 @@
 package com.example.todo.entities;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 @Entity
@@ -64,5 +67,19 @@ public class Task {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public String dateFormatter(Task task){
+
+        String template = "dd/MMMM/yyyy";
+
+        DateFormat df = new SimpleDateFormat(template);
+
+        Date taskDate = task.getDeadline().getTime();
+
+        String dateAsString = df.format(taskDate);
+
+        return  dateAsString;
+
     }
 }

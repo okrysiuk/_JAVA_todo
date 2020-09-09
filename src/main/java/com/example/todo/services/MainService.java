@@ -92,32 +92,27 @@ public class MainService {
         return true;
     }
 
-    public boolean updateTask(Task task, String name){
+    public void updateTask(Task task, String name){
         task.setName(name);
         taskRepo.save(task);
-        return true;
     }
     public void updateStatus(Task task, boolean doneTask){
 
-        if (doneTask == true){
-            task.setStatus(false);
-        } else {
-            task.setStatus(true);
-        }
+        task.setStatus(!doneTask);
     }
     public void updateDate(Task task, int year, int month, int day) {
 
-        Calendar defaultDeadline = new GregorianCalendar(2021, 0 , 1);
+        Calendar defaultDeadline = new GregorianCalendar(2021, Calendar.JANUARY, 1);
 
         Calendar newDeadline = new GregorianCalendar(year, month, day);
         if(!defaultDeadline.equals(newDeadline)){
             try {
                 task.setDeadline(newDeadline);
-                taskRepo.save(task);
             } catch (Exception e) {
                 System.out.println("Wrong date!");
             }
         }
+        taskRepo.save(task);
     }
         public void updatePriority (Task task, int priority){
             if(priority != 0)
@@ -125,5 +120,4 @@ public class MainService {
 
             taskRepo.save(task);
         }
-
 }
