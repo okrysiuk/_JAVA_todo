@@ -7,9 +7,9 @@ import com.example.todo.repositories.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MainService {
@@ -37,7 +37,7 @@ public class MainService {
 
         return true;
     }
-    public boolean deleteProject(long projectId){
+    public void deleteProject(long projectId){
 
         Project project = projectRepo.findById(projectId);
 
@@ -49,7 +49,6 @@ public class MainService {
 
         this.projectRepo.delete(project);
 
-        return true;
     }
 
     public boolean addTask(String name, long projectId){
@@ -69,4 +68,56 @@ public class MainService {
 
         return true;
     }
+
+    public void deleteTask(long taskId) {
+
+        Task task = taskRepo.findById(taskId);
+
+        taskRepo.delete(task);
+    }
+
+    public Project getProject(long projectId){
+
+        return projectRepo.findById(projectId);
+    }
+
+    public Task getTask(long taskId){
+
+        return taskRepo.findById(taskId);
+    }
+
+    public boolean updateProject(Project project, String name){
+        project.setName(name);
+        projectRepo.save(project);
+        return true;
+    }
+
+    public void updateTask(Task task, String name){
+        task.setName(name);
+        taskRepo.save(task);
+    }
+    public void updateStatus(Task task, boolean doneTask){
+
+        task.setStatus(!doneTask);
+    }
+    public void updateDate(Task task, int year, int month, int day) {
+
+        Calendar defaultDeadline = new GregorianCalendar(2021, Calendar.JANUARY, 1);
+
+        Calendar newDeadline = new GregorianCalendar(year, month, day);
+        if(!defaultDeadline.equals(newDeadline)){
+            try {
+                task.setDeadline(newDeadline);
+            } catch (Exception e) {
+                System.out.println("Wrong date!");
+            }
+        }
+        taskRepo.save(task);
+    }
+        public void updatePriority (Task task, int priority){
+            if(priority != 0)
+            task.setPriority(priority);
+
+            taskRepo.save(task);
+        }
 }
