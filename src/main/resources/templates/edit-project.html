@@ -30,6 +30,7 @@
             <form method="post">
                 <input type="text" th:value="${project.name}" name="name" placeholder="Note name..." class="form-control"><br>
                 <button type="submit" class="btn btn-success">Update project</button>
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
             </form>
         </div>
 

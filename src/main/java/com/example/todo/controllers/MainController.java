@@ -2,8 +2,10 @@ package com.example.todo.controllers;
 
 import com.example.todo.entities.Project;
 import com.example.todo.entities.Task;
+import com.example.todo.entities.User;
 import com.example.todo.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -98,6 +100,7 @@ public class MainController {
                                 @RequestParam(required = false) int month,
                                 @RequestParam(required = false) int day,
                                 @RequestParam(required = false) int priority,
+                                @AuthenticationPrincipal User user,
                                 Model model){
 
         Task task = mainService.getTask(taskId);
@@ -109,6 +112,8 @@ public class MainController {
         mainService.updatePriority(task, priority);
 
         mainService.updateDate(task, year, month, day);
+
+        model.addAttribute("user", user);
 
         return "redirect:/";
     }
