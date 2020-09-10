@@ -14,18 +14,16 @@ public class Project {
     @Column(name = "name")
     private String name;
 
-    public Project(){
-
-    }
-
-    public Project(String name) {
-        super();
-        this.name = name;
-    }
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     List<Task> tasks = new ArrayList<>();
+
+    public Project() {
+    }
+
+    public Project(String name) {
+        this.name = name;
+    }
 
     public long getId() {
         return id;

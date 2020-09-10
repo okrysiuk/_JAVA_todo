@@ -23,7 +23,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model){
+    public String addUser(User user, Model model) {
 
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
@@ -38,5 +38,4 @@ public class RegistrationController {
 
         return "redirect:/login";
     }
-
 }

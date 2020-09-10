@@ -100,7 +100,6 @@ public class MainController {
                                 @RequestParam(required = false) int month,
                                 @RequestParam(required = false) int day,
                                 @RequestParam(required = false) int priority,
-                                @AuthenticationPrincipal User user,
                                 Model model){
 
         Task task = mainService.getTask(taskId);
@@ -112,8 +111,6 @@ public class MainController {
         mainService.updatePriority(task, priority);
 
         mainService.updateDate(task, year, month, day);
-
-        model.addAttribute("user", user);
 
         return "redirect:/";
     }
