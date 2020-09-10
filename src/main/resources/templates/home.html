@@ -27,14 +27,14 @@
             <form th:action="'/delete-project/' + ${project.id}" method="post">
                 <div class="d-flex justify-content-between align-items-baseline" style="margin-bottom: 10px">
                     <div>
-                        <h2 th:text="${project.name}" class="card-text text-center d-inline-block text-dark" style="text-transform: uppercase;"></h2>
+                        <h2 th:text="${project.name}" class="card-text text-center d-inline-block text-primary" style="text-transform: uppercase;"></h2>
                     </div>
                     <div>
                         <a class="btn btn-outline-warning" th:href="'/edit-project/' + ${project.id}">Edit</a>
                         <button class="btn btn-outline-danger" type="submit">Delete</button>
                     </div>
                 </div>
-<!--                <br>-->
+                <!--                <br>-->
             </form>
             <div class="list-inline" style="padding-bottom: 10px; border-bottom: 1px solid #e8e8e8">
                 <form th:action="'/add-task/' + ${project.id}" method="post">
@@ -44,7 +44,7 @@
                     </div>
                 </form>
             </div>
-<!--            <br>-->
+            <!--            <br>-->
             <div th:each="task : ${project.getTasks()}" class="list-inline">
                 <form th:action="'/delete-task/' + ${task.id}" method="post">
                     <div style="margin-top: 5px;">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </form>
-<!--                <hr>-->
+                <!--                <hr>-->
             </div>
         </div>
         <div class="col-lg-8">
