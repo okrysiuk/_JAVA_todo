@@ -35,6 +35,7 @@
             <div class="d-flex justify-content-between align-items-baseline" style="margin-bottom: 10px">
                 <div>
                     <h2 th:text="${project.name}" class="card-text text-center d-inline-block text-primary" style="text-transform: uppercase;"></h2>
+                    <p th:text="${project.getAuthorName()}"></p>
                 </div>
                 <div>
                     <form th:action="'/delete-project/' + ${project.id}" method="post">

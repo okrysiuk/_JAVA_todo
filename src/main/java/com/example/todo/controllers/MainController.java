@@ -20,17 +20,19 @@ public class MainController {
     private MainService mainService;
 
     @GetMapping("/")
-    public String home(Model model){
+    public String home(@AuthenticationPrincipal User user, Model model){
 
         model.addAttribute("projects", mainService.showAll());
+        model.addAttribute("user", user);
 
         return "home";
     }
 
     @PostMapping("/add-project")
-    public String addProject(@RequestParam(required = false) String name, Model model){
+    public String addProject(@RequestParam(required = false) String name,
+                             @AuthenticationPrincipal User user, Model model){
 
-        if(!mainService.addProject(name)){
+        if(!mainService.addProject(user, name)){
             model.addAttribute("projectExists", "Same project already exits");
         }
 
