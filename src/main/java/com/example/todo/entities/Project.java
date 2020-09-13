@@ -14,18 +14,25 @@ public class Project {
     @Column(name = "name")
     private String name;
 
-    public Project(){
-
-    }
-
-    public Project(String name) {
-        super();
-        this.name = name;
-    }
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     List<Task> tasks = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User author;
+
+    public Project() {
+    }
+
+    public Project(User user, String name) {
+        this.author = user;
+        this.name = name;
+    }
+
+    public String getAuthorName() {
+        return author != null ? author.getUsername() : "no author";
+    }
 
     public long getId() {
         return id;

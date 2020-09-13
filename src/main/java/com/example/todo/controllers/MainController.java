@@ -2,8 +2,10 @@ package com.example.todo.controllers;
 
 import com.example.todo.entities.Project;
 import com.example.todo.entities.Task;
+import com.example.todo.entities.User;
 import com.example.todo.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,17 +20,19 @@ public class MainController {
     private MainService mainService;
 
     @GetMapping("/")
-    public String home(Model model){
+    public String home(@AuthenticationPrincipal User user, Model model){
 
-        model.addAttribute("projects", mainService.showAll());
+        model.addAttribute("projects", mainService.showAll(user));
+        model.addAttribute("user", user);
 
         return "home";
     }
 
     @PostMapping("/add-project")
-    public String addProject(@RequestParam(required = false) String name, Model model){
+    public String addProject(@RequestParam(required = false) String name,
+                             @AuthenticationPrincipal User user, Model model){
 
-        if(!mainService.addProject(name)){
+        if(!mainService.addProject(user, name)){
             model.addAttribute("projectExists", "Same project already exits");
         }
 

@@ -2,14 +2,13 @@ package com.example.todo.services;
 
 import com.example.todo.entities.Project;
 import com.example.todo.entities.Task;
+import com.example.todo.entities.User;
 import com.example.todo.repositories.ProjectRepo;
 import com.example.todo.repositories.TaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MainService {
@@ -19,20 +18,31 @@ public class MainService {
     @Autowired
     private TaskRepo taskRepo;
 
-    public Iterable<Project> showAll(){
-        Iterable<Project> projects;
-        projects = projectRepo.findAll();
-        return projects;
+//    public Iterable<Project> showAll(){
+//        Iterable<Project> projects;
+//        projects = projectRepo.findAll();
+//        return projects;
+//    }
+    public ArrayList<Project> showAll(User user){
+        Iterable<Project> iterableProjects;
+        iterableProjects = projectRepo.findAll();
+        ArrayList<Project> res = new ArrayList<>();
+        for (Project i : iterableProjects) {
+            if(i.getAuthorName().equals(user.getUsername())){
+                res.add(i);
+            }
+        }
+        return res;
     }
 
-    public boolean addProject(String name){
+    public boolean addProject(User user, String name){
 
         Project projectFromDb = projectRepo.findByName(name);
 
         if (projectFromDb != null){
             return false;
         }
-        Project project = new Project(name);
+        Project project = new Project(user, name);
         this.projectRepo.save(project);
 
         return true;
