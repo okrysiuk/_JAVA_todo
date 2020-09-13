@@ -18,10 +18,21 @@ public class MainService {
     @Autowired
     private TaskRepo taskRepo;
 
-    public Iterable<Project> showAll(){
-        Iterable<Project> projects;
-        projects = projectRepo.findAll();
-        return projects;
+//    public Iterable<Project> showAll(){
+//        Iterable<Project> projects;
+//        projects = projectRepo.findAll();
+//        return projects;
+//    }
+    public ArrayList<Project> showAll(User user){
+        Iterable<Project> iterableProjects;
+        iterableProjects = projectRepo.findAll();
+        ArrayList<Project> res = new ArrayList<>();
+        for (Project i : iterableProjects) {
+            if(i.getAuthorName().equals(user.getUsername())){
+                res.add(i);
+            }
+        }
+        return res;
     }
 
     public boolean addProject(User user, String name){

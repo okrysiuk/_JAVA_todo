@@ -30,7 +30,6 @@
                     <input type="hidden" name="_csrf" value="${_csrf.token}" />
                     <input type="text" th:value="${task.name}" name="name" placeholder="Note name..." class="form-control"><br>
                     <input type="checkbox" name="doneTask" th:value="true" th:checked="${!task.isStatus()}"><label> Mark as done</label><hr>
-    <!--                <p th:text="'Current deadline:  ' + ${task.getDeadline().getTime().toGMTString()}"></p>-->
                     <p th:text="'Current deadline:  ' + ${task.dateFormatter(task)}"></p>
                     <p>Select new deadline:</p>
                     <div th:insert="fragments.html :: date"></div><hr>

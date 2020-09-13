@@ -22,7 +22,7 @@ public class MainController {
     @GetMapping("/")
     public String home(@AuthenticationPrincipal User user, Model model){
 
-        model.addAttribute("projects", mainService.showAll());
+        model.addAttribute("projects", mainService.showAll(user));
         model.addAttribute("user", user);
 
         return "home";
