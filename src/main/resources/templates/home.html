@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Task manager</title>
+    <title>Simple ToDo WebApp</title>
 
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
@@ -24,8 +24,8 @@
 
     <div class="row">
         <div class="col-lg-8">
-            <h1 class="my-4" style="text-transform: uppercase;">My project's</h1>
-            <!--            <h3 class="my-4"  th:text="${user} + ' projects'"></h3>-->
+<!--            <h1 class="my-4" style="text-transform: uppercase;">My project's</h1>-->
+            <h2 class="my-4" style="text-transform: uppercase;" th:text="${user.getUsername()} + '\'s projects'"></h2>
         </div>
 
         <!-- Projects Column -->
@@ -35,7 +35,7 @@
             <div class="d-flex justify-content-between align-items-baseline" style="margin-bottom: 10px">
                 <div>
                     <h2 th:text="${project.name}" class="card-text text-center d-inline-block text-primary" style="text-transform: uppercase;"></h2>
-                    <p th:text="${project.getAuthorName()}"></p>
+<!--                    <p th:text="${project.getAuthorName()}"></p>-->
                 </div>
                 <div>
                     <form th:action="'/delete-project/' + ${project.id}" method="post">
@@ -64,8 +64,8 @@
                 </div>
                 <div class="d-flex justify-content-between align-items-baseline" style="border-bottom: 1px solid #e8e8e8">
                     <div class="d-inline-block" th:switch="${task.getPriority()}" style="font-size: 0.9rem;">
-                        <p class="text-muted" th:case="1">Priority: Low, Deadline: <span th:text="${task.dateFormatter(task)}"></span></p>
-                        <p class="text-dark" th:case="2">Priority: Normal, Deadline: <span th:text="${task.dateFormatter(task)}"></span></p>
+                        <p class="text-secondary" th:case="1">Priority: Low, Deadline: <span th:text="${task.dateFormatter(task)}"></span></p>
+                        <p class="text-success" th:case="2">Priority: Normal, Deadline: <span th:text="${task.dateFormatter(task)}"></span></p>
                         <p class="text-danger" th:case="3">Priority: High, Deadline: <span th:text="${task.dateFormatter(task)}"></span></p>
                     </div>
                     <div>
@@ -90,6 +90,8 @@
                 </form>
             </div>
         </div>
+        <br>
+        <br>
     </div>
 </div>
 <!-- Footer -->

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
 
@@ -23,12 +24,19 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model) {
+    public String addUser(User user,
+                          @RequestParam(required = false) String password,
+                          @RequestParam(required = false) String passwordConfirmation,
+                          Model model) {
 
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
         if(userFromDb != null) {
             model.addAttribute("userExists", "User already exists");
+            return "registration";
+        }
+        if(!password.equals(passwordConfirmation)) {
+            model.addAttribute("passwordMismatch", "Password mismatch");
             return "registration";
         }
 
