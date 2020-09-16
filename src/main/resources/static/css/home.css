@@ -1,0 +1,10 @@
+.selected {
+    opacity: 0.6;
+}
+.tasks__item {
+    cursor: move;
+    background-color: #fbfaef;
+    border: 2px solid #9dcbff;
+    margin-bottom: 10px;
+    padding: 5px;
+}

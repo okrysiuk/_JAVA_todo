@@ -37,11 +37,11 @@ public class MainService {
 
     public boolean addProject(User user, String name){
 
-        Project projectFromDb = projectRepo.findByName(name);
-
-        if (projectFromDb != null){
-            return false;
-        }
+//        Project projectFromDb = projectRepo.findByName(name);
+//
+//        if (projectFromDb != null){
+//            return false;
+//        }
         Project project = new Project(user, name);
         this.projectRepo.save(project);
 
@@ -63,11 +63,11 @@ public class MainService {
 
     public boolean addTask(String name, long projectId){
 
-        Task taskFromDb = taskRepo.findByName(name);
-
-        if (taskFromDb != null){
-            return false;
-        }
+//        Task taskFromDb = taskRepo.findByName(name);
+//
+//        if (taskFromDb != null){
+//            return false;
+//        }
         Task task = new Task(name);
 
         Project project = projectRepo.findById(projectId);
