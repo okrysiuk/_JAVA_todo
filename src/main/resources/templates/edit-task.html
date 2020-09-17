@@ -33,13 +33,13 @@
                     <p th:text="'Current deadline:  ' + ${task.dateFormatter(task)}"></p>
                     <p>Select new deadline:</p>
                     <div th:insert="fragments.html :: date"></div><hr>
-                    <div th:switch="${task.getPriority()}">
-                        <p class="text-muted" th:case="1">Current priority: Low</p>
-                        <p class="text-success" th:case="2">Current priority: Normal</p>
-                        <p class="text-danger" th:case="3">Current priority: High</p>
-                    </div>
-                    <p>Choose priority:</p>
-                    <div th:insert="fragments.html :: priority"></div><hr>
+<!--                    <div th:switch="${task.getPriority()}">-->
+<!--                        <p class="text-muted" th:case="1">Current priority: Low</p>-->
+<!--                        <p class="text-success" th:case="2">Current priority: Normal</p>-->
+<!--                        <p class="text-danger" th:case="3">Current priority: High</p>-->
+<!--                    </div>-->
+<!--                    <p>Choose priority:</p>-->
+<!--                    <div th:insert="fragments.html :: priority"></div><hr>-->
                     <button type="submit" class="btn btn-success">Update task</button>
                 </form>
         </div>

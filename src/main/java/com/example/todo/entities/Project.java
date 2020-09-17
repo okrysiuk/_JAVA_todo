@@ -15,6 +15,7 @@ public class Project {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @OrderBy("priority DESC, id ASC")
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     List<Task> tasks = new ArrayList<>();
 

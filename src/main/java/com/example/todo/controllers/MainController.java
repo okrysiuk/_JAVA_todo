@@ -3,6 +3,8 @@ package com.example.todo.controllers;
 import com.example.todo.entities.Project;
 import com.example.todo.entities.Task;
 import com.example.todo.entities.User;
+import com.example.todo.repositories.ProjectRepo;
+import com.example.todo.repositories.TaskRepo;
 import com.example.todo.services.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,8 +15,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class MainController {
+    @Autowired
+    private ProjectRepo projectRepo;
+
+    @Autowired
+    private TaskRepo taskRepo;
 
     @Autowired
     private MainService mainService;
@@ -113,6 +123,39 @@ public class MainController {
         mainService.updatePriority(task, priority);
 
         mainService.updateDate(task, year, month, day);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/up/{idp}/{idt}")
+    public String up(@PathVariable(value = "idp")long projectId,
+                     @PathVariable(value = "idt")long taskId,
+                     @AuthenticationPrincipal User user,
+                     Model model){
+
+        Task currentTask = taskRepo.findById(taskId);
+
+        int currentPriority = currentTask.getPriority();
+
+        int newPriority = currentPriority + 1;
+
+        mainService.updatePriority(currentTask, newPriority);
+
+        return "redirect:/";
+    }
+    @PostMapping("/down/{idp}/{idt}")
+    public String down(@PathVariable(value = "idp")long projectId,
+                       @PathVariable(value = "idt")long taskId,
+                       @AuthenticationPrincipal User user,
+                       Model model){
+
+        Task currentTask = taskRepo.findById(taskId);
+
+        int currentPriority = currentTask.getPriority();
+
+        int newPriority = currentPriority - 1;
+
+        mainService.updatePriority(currentTask, newPriority);
 
         return "redirect:/";
     }
