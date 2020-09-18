@@ -111,7 +111,6 @@ public class MainController {
                                 @RequestParam(required = false) int year,
                                 @RequestParam(required = false) int month,
                                 @RequestParam(required = false) int day,
-                                @RequestParam(required = false) int priority,
                                 Model model){
 
         Task task = mainService.getTask(taskId);
@@ -119,8 +118,6 @@ public class MainController {
         mainService.updateTask(task, name);
 
         mainService.updateStatus(task, doneTask);
-
-        mainService.updatePriority(task, priority);
 
         mainService.updateDate(task, year, month, day);
 
