@@ -17,6 +17,7 @@ public class Task {
     private boolean status;
     private Calendar deadline;
     private int priority;
+    private int up;
 
     public Task(){
 
@@ -26,7 +27,7 @@ public class Task {
         this.name = name;
         this.status = true;
         this.deadline = new GregorianCalendar(2021, 0 , 1);
-        this.priority = 2;
+        this.priority = 4;
     }
 
     public long getId() {
@@ -67,6 +68,14 @@ public class Task {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    public int getUp() {
+        return up;
+    }
+
+    public void setUp(int up) {
+        this.up = up;
     }
 
     public String dateFormatter(Task task){
