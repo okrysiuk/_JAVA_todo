@@ -34,9 +34,9 @@ public class MainService {
 
 //        Project projectFromDb = projectRepo.findByName(name);
 //
-//        if (projectFromDb != null){
-//            return false;
-//        }
+        if (name.isEmpty()){
+            return false;
+        }
         Project project = new Project(user, name);
         this.projectRepo.save(project);
 
@@ -60,9 +60,9 @@ public class MainService {
 
 //        Task taskFromDb = taskRepo.findByName(name);
 //
-//        if (taskFromDb != null){
-//            return false;
-//        }
+        if (name.isEmpty()){
+            return false;
+        }
         Task task = new Task(name);
 
         Project project = projectRepo.findById(projectId);

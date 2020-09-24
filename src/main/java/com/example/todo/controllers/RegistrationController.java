@@ -40,6 +40,11 @@ public class RegistrationController {
             return "registration";
         }
 
+        if(password.length() < 6) {
+            model.addAttribute("passwordMismatch", "Password too short");
+            return "registration";
+        }
+
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
